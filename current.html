@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>SFSU STUDENT</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+        
+        <form action="database.php" method="GET">
+            Quote: <input type="text" name="quote"><br>
+            Author: <input type="text" name="author"><br>
+            <input type="submit">
+        </form>
+        
+        <script>
+            function runScript(){
+                var quote = document.getElementsByClassId("quote").value;
+                var author = document.getElementsByClassId("author").value;
+                $.get("database.php?quote="+quote+"&author="+author);
+                
+            }
+        </script>
+        
+    </body>
+    
+</html>
