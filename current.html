@@ -9,16 +9,16 @@
     
     <body>
         
-        <form action="database.php" method="GET">
-            Quote: <input type="text" name="quote"><br>
-            Author: <input type="text" name="author"><br>
-            <input type="submit">
+        <form action="database.php" method="get">
+            Quote:<br> <input type="text" name="quote"><br>
+            Author:<br> <input type="text" name="author"><br>
+            <input type="submit" value="Submit" onclick="runScript()">
         </form>
         
         <script>
             function runScript(){
-                var quote = document.getElementsByClassId("quote").value;
-                var author = document.getElementsByClassId("author").value;
+                var quote = document.getElementsById("quote").value;
+                var author = document.getElementsById("author").value;
                 $.get("database.php?quote="+quote+"&author="+author);
                 
             }

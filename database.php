@@ -5,28 +5,29 @@ $password = "csc412";
 $dbname = "csc412";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$con = mysqli_connect($servername, $username, $password, $dbname);
  // Check connection
- if ($conn->connect_error) {
-     die("Connection failed: " . $conn->connect_error);
+ if ($con->connect_error) {
+     die("Connection failed: " . $con->connect_error);
  }else {
-         echo 'Connection successful';    
+         echo 'Connection successful.';
+         echo PHP_EOL;
      }
  
-$quote = mysqli_real_escape_string($conn, $_GET('Quote'));     
-$author = mysqli_real_escape_string($conn, $_GET('Author'));     
+$quote = mysqli_real_escape_string($con, $_GET['quote']);     
+$author = mysqli_real_escape_string($con, $_GET['author']);     
 
 if (!($quote == '' || $author == '')){
-    $sql = "INSERT INTO Khalid'sTable VALUES ('Quote', 'Author')";
-    mysql_query($sql);
-    if (!mysqli_query($conn, $sql)){
-    die('Error: ' . mysqli_errno($conn));
+    $sql = "INSERT INTO KhalidsTable (quote, author) VALUES ('$quote', '$author')";
+    
+    if (!mysqli_query($con, $sql)){
+    die('Error: ' . mysqli_error($con));
     }
 }
 
-$result = mysqli_query($conn, "SELECT * FROM Khalid'sTable");
+$result = mysqli_query($con, "SELECT * FROM KhalidsTable");
 
 echo $result;
 
-$conn->close();
+mysqli_close($con);
  ?> 
