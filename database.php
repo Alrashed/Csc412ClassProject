@@ -10,8 +10,7 @@ $con = mysqli_connect($servername, $username, $password, $dbname);
  if ($con->connect_error) {
      die("Connection failed: " . $con->connect_error);
  }else {
-         echo 'Connection successful.';
-         echo PHP_EOL;
+         echo "Connection successful.\n\n";
      }
  
 $quote = mysqli_real_escape_string($con, $_GET['quote']);     
@@ -25,9 +24,19 @@ if (!($quote == '' || $author == '')){
     }
 }
 
-$result = mysqli_query($con, "SELECT * FROM KhalidsTable");
+$query = "SELECT quote, author FROM KhalidsTable ORDER BY KhalidsTable.index DESC LIMIT 1";
 
-echo $result;
+if ($result = mysqli_query($con, $query)) {
+    
+    printf("Submitted:");
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        printf ("\n%s (%s).", $row["quote"], $row["author"]);
+    }
+
+    mysqli_free_result($result);
+}
 
 mysqli_close($con);
+
  ?> 
