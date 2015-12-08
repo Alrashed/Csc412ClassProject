@@ -29,6 +29,5 @@ $result = mysqli_query($con, "SELECT * FROM KhalidsTable");
 
 echo $result;
 
-
 mysqli_close($con);
  ?> 
