@@ -12,27 +12,26 @@ $con = mysqli_connect($servername, $username, $password, $dbname);
  }else {
          echo "Connection successful.\n\n";
      }
- 
-$name = mysqli_real_escape_string($con, $_GET['name']);     
+      
 $email = mysqli_real_escape_string($con, $_GET['email']);
-$number = mysqli_real_escape_string($con, $_GET['number']); 
+$message = mysqli_real_escape_string($con, $_GET['message']); 
 
-if (!($quote == '' || $author == '')){
-    $sql = "INSERT INTO KhalidsTable2 (name, email, number) VALUES ('$name', '$email', '$number')";
+if (!($email == '' || $message == '')){
+    $sql = "INSERT INTO KhalidsTable2 (email, message) VALUES ('$email', '$message')";
     
     if (!mysqli_query($con, $sql)){
     die('Error: ' . mysqli_error($con));
     }
 }
 
-$query = "SELECT name, email, number FROM KhalidsTable2 ORDER BY KhalidsTable.index DESC LIMIT 1";
+$query = "SELECT email, message FROM KhalidsTable2 ORDER BY KhalidsTable2.index DESC LIMIT 1";
 
 if ($result = mysqli_query($con, $query)) {
     
     printf("Data sent:");
     
     while ($row = mysqli_fetch_assoc($result)) {
-        printf ("\nName: %s\nEmail: %s\nPhone Number: %s", $row["name"], $row["email"], $row["number"]);
+        printf ("\nEmail: %s\nMessage: %s", $row["email"], $row["message"]);
     }
 
     mysqli_free_result($result);
